@@ -76,6 +76,9 @@ namespace DatabaseCreation
               City = c.City,
               State = c.State,
               Zip = c.Zip
+            },
+            BillTo = new Address()
+            {
             }
           });
         });
@@ -97,6 +100,7 @@ namespace DatabaseCreation
         // generate 500k random orders
         Orders = new List<Order>();
         List<Product> productsTmp;
+        Product pTmp;
         int nbProduct;
         for(int i = 0; i < 500000; i++)
         {
@@ -105,7 +109,9 @@ namespace DatabaseCreation
 
           for(int j = 0; j < nbProduct; j++)
           {
-            productsTmp.Add(Products[rand.Next(Products.Count)]);
+            pTmp = Products[rand.Next(Products.Count)];
+            if(productsTmp.Contains(pTmp) == false)
+              productsTmp.Add(pTmp);
           }
 
           Orders.Add(new Order()

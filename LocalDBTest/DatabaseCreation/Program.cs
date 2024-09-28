@@ -8,7 +8,14 @@
 
       RawDataGenerator generator = new RawDataGenerator();
 
-      await generator.Generate(@"C:\Users\sideshowbob\Downloads\clientsList.json", @"C:\Users\sideshowbob\Downloads\productList.json").ConfigureAwait(false);
+      string randomClientsFile = @"C:\Users\sideshowbob\Downloads\clientsList.json";
+      string randomProductsFile = @"C:\Users\sideshowbob\Downloads\productList.json";
+
+      await generator.Generate(randomClientsFile, randomProductsFile).ConfigureAwait(false);
+
+      SqliteFileGenerator.Generate(@"C:\Users\sideshowbob\Downloads\sqliteDb.db", generator.Clients, generator.Products, generator.Orders);
+      DbliteFileGenerator.Generate(@"C:\Users\sideshowbob\Downloads\litedb.db", generator.Clients, generator.Products, generator.Orders);
+
       Console.ReadLine();
     }
 
